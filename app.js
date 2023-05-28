@@ -39,7 +39,6 @@ app.get('/api/cursos/programacion/:lenguaje', (req, res) => {
 });
 
 app.get('/api/cursos/matematicas/:tema', (req, res) => {
-  // accedemos al parámetro a través del objeto disponible en 'req', 'params' y luego el nombre del parámetro q hemos creado 'lenguaje'.
   const tema = req.params.tema;
   const resultados = infoCursos.matematicas.filter(
     (curso) => curso.tema === tema
@@ -48,6 +47,22 @@ app.get('/api/cursos/matematicas/:tema', (req, res) => {
   if (resultados.length === 0) {
     return res.status(404).send(`No se encontraron cursos de ${tema}`);
   }
+  res.send(resultados);
+});
+
+// usando dos parmámetros
+app.get('/api/cursos/programacion/:lenguaje/:nivel', (req, res) => {
+  const lenguaje = req.params.lenguaje;
+  const nivel = req.params.nivel;
+  const resultados = infoCursos.programacion.filter(
+    (curso) => curso.lenguaje === lenguaje && curso.nivel === nivel
+  );
+  if (resultados.length === 0) {
+    return res
+      .status(404)
+      .send(`No se encontraron cursos de ${lenguaje} de nivel ${nivel}`);
+  }
+
   res.send(resultados);
 });
 
