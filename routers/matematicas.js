@@ -1,0 +1,23 @@
+const express = require('express');
+
+const { matematicas } = require('../datos/cursos.js').infoCursos;
+
+const routerMatematicas = express.Router();
+
+routerMatematicas.get('/', (req, res) => {
+  res.send(matematicas);
+});
+
+// Parámetros URL en ROUTING (el parámetro es lo que sigue a los dos puntos, p.e. 'lenguajes' aquí)
+
+routerMatematicas.get('/:tema', (req, res) => {
+  const tema = req.params.tema;
+  const resultados = matematicas.filter((curso) => curso.tema === tema);
+
+  if (resultados.length === 0) {
+    return res.status(404).send(`No se encontraron cursos de ${tema}`);
+  }
+  res.send(resultados);
+});
+
+module.exports = routerMatematicas;
