@@ -6,6 +6,7 @@ const { infoCursos } = require('./datos/cursos.js');
 console.log(infoCursos);
 
 //app.use('/api/cursos/programacion', routerProgramacion);
+const routerProgramacion = require('./routers/programacion.js');
 
 const routerMatematicas = require('./routers/matematicas.js');
 app.use('/api/cursos/matematicas', routerMatematicas);

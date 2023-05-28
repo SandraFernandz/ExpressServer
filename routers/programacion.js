@@ -1,9 +1,11 @@
 const express = require('express');
 
+const { programacion } = require('../datos/cursos.js').infoCursos;
+
 const routerProgramacion = express.Router();
 
 routerProgramacion.get('/', (req, res) => {
-  res.send(infoCursos.programacion);
+  res.send(programacion);
 });
 
 // Parámetros URL en ROUTING (el parámetro es lo que sigue a los dos puntos, p.e. 'lenguajes' aquí)
@@ -11,7 +13,7 @@ routerProgramacion.get('/', (req, res) => {
 routerProgramacion.get('/:lenguaje', (req, res) => {
   // accedemos al parámetro a través del objeto disponible en 'req', 'params' y luego el nombre del parámetro q hemos creado 'lenguaje'.
   const lenguaje = req.params.lenguaje;
-  const resultados = infoCursos.programacion.filter(
+  const resultados = programacion.filter(
     (curso) => curso.lenguaje === lenguaje
   );
 
@@ -25,7 +27,7 @@ routerProgramacion.get('/:lenguaje', (req, res) => {
 routerProgramacion.get('/:lenguaje/:nivel', (req, res) => {
   const lenguaje = req.params.lenguaje;
   const nivel = req.params.nivel;
-  const resultados = infoCursos.programacion.filter(
+  const resultados = programacion.filter(
     (curso) => curso.lenguaje === lenguaje && curso.nivel === nivel
   );
   if (resultados.length === 0) {
@@ -40,3 +42,5 @@ routerProgramacion.get('/:lenguaje/:nivel', (req, res) => {
 
   res.send(resultados);
 });
+
+module.exports = routerProgramacion;
