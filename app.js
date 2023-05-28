@@ -38,6 +38,19 @@ app.get('/api/cursos/programacion/:lenguaje', (req, res) => {
   res.send(resultados);
 });
 
+app.get('/api/cursos/matematicas/:tema', (req, res) => {
+  // accedemos al parámetro a través del objeto disponible en 'req', 'params' y luego el nombre del parámetro q hemos creado 'lenguaje'.
+  const tema = req.params.tema;
+  const resultados = infoCursos.matematicas.filter(
+    (curso) => curso.tema === tema
+  );
+
+  if (resultados.length === 0) {
+    return res.status(404).send(`No se encontraron cursos de ${tema}`);
+  }
+  res.send(resultados);
+});
+
 const PUERTO = process.env.PORT || 3000;
 
 app.listen(PUERTO, () => {
