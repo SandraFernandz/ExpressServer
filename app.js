@@ -19,6 +19,25 @@ app.get('/api/cursos/programacion', (req, res) => {
   res.send(infoCursos.programacion);
 });
 
+app.get('/api/cursos/matematicas', (req, res) => {
+  res.send(infoCursos.matematicas);
+});
+
+// Parámetros URL en ROUTING (el parámetro es lo que sigue a los dos puntos, p.e. 'lenguajes' aquí)
+
+app.get('/api/cursos/programacion/:lenguaje', (req, res) => {
+  // accedemos al parámetro a través del objeto disponible en 'req', 'params' y luego el nombre del parámetro q hemos creado 'lenguaje'.
+  const lenguaje = req.params.lenguaje;
+  const resultados = infoCursos.programacion.filter(
+    (curso) => curso.lenguaje === lenguaje
+  );
+
+  if (resultados.length === 0) {
+    return res.status(404).send(`No se encontraron cursos de ${lenguaje}`);
+  }
+  res.send(resultados);
+});
+
 const PUERTO = process.env.PORT || 3000;
 
 app.listen(PUERTO, () => {
