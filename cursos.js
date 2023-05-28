@@ -26,23 +26,25 @@ let infoCursos = {
     {
       id: 1,
       titulo: 'Aprende Calculo',
-      lenguaje: 'calculo',
+      tema: 'calculo',
       vistas: '11768',
       nivel: 'basico',
     },
     {
       id: 2,
       titulo: 'Aprende Algebra',
-      lenguaje: 'algebra',
+      tema: 'algebra',
       vistas: '13090',
       nivel: 'intermedio',
     },
     {
       id: 3,
       titulo: 'Aprende Aritmetica',
-      lenguaje: 'aritmetica',
+      tema: 'aritmetica',
       vistas: '97886',
       nivel: 'basico',
     },
   ],
 };
+
+module.exports.infoCursos = infoCursos;
