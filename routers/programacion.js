@@ -66,4 +66,15 @@ routerProgramacion.put('/:id', (req, res) => {
   res.send(JSON.stringify(programacion));
 });
 
+routerProgramacion.patch('/:id', (req, res) => {
+  const infoActualizada = req.body;
+  const id = req.params.id;
+  const indice = programacion.findIndex((curso) => curso.id == id);
+  if (indice >= 0) {
+    const cursoAModificar = programacion[indice];
+    Object.assign(cursoAModificar, infoActualizada);
+  }
+  res.send(JSON.stringify(programacion));
+});
+
 module.exports = routerProgramacion;
