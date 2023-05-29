@@ -53,4 +53,17 @@ routerProgramacion.post('/', (req, res) => {
   res.send(JSON.stringify(programacion));
 });
 
+routerProgramacion.put('/:id', (req, res) => {
+  //contenido del contenido del cuerpo de solicitud
+  //en cuerpo solicitud recibimos id actualizado
+  const cursoActualizado = req.body;
+  //extraemos id del curso
+  const id = req.params.id;
+  const indice = programacion.findIndex((curso) => curso.id == id);
+  if (indice >= 0) {
+    programacion[indice] = cursoActualizado;
+  }
+  res.send(JSON.stringify(programacion));
+});
+
 module.exports = routerProgramacion;
