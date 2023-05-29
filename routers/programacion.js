@@ -20,6 +20,9 @@ routerProgramacion.get('/:lenguaje', (req, res) => {
   if (resultados.length === 0) {
     return res.status(404).send(`No se encontraron cursos de ${lenguaje}`);
   }
+  if (req.query.ordenar === 'vistas') {
+    return res.send(resultados.sort((a, b) => b.vistas - a.vistas));
+  }
   res.send(resultados);
 });
 
@@ -34,10 +37,6 @@ routerProgramacion.get('/:lenguaje/:nivel', (req, res) => {
     return res
       .status(404)
       .send(`No se encontraron cursos de ${lenguaje} de nivel ${nivel}`);
-  }
-
-  if (req.query.ordenar === 'vistas') {
-    return res.send(resultados.sort((a, b) => b.vistas - a.vistas));
   }
 
   res.send(resultados);
